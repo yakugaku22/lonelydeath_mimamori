@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>みまもりアプリ｜見守る側</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/patient.css" />
+  <link rel="stylesheet" href="css/watcher.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="bg-blobs">
+    <div class="blob blob1" style="background: var(--green);"></div>
+    <div class="blob blob2" style="background: var(--teal);"></div>
+    <div class="blob blob3" style="background: var(--yellow);"></div>
+  </div>
+
+  <main class="page-container">
+    <div class="page-card">
+      <!-- ヘッダー -->
+      <header class="page-header">
+        <button class="back-btn" onclick="window.location.href='index.html'">← もどる</button>
+        <span class="header-badge watcher-badge">見守る側</span>
+      </header>
+
+      <!-- タイトル -->
+      <section class="watcher-title-section">
+        <div class="greeting-icon">👨‍👩‍👧</div>
+        <h2 class="greeting-name" id="watcherTitle">〇〇さんのデータ</h2>
+      </section>
+
+      <!-- 通知バナー（体調が悪いとき） -->
+      <div class="alert-banner" id="alertBanner" style="display:none;">
+        <span class="alert-icon">🚨</span>
+        <div>
+          <p class="alert-title">体調が悪いとの報告があります！</p>
+          <p class="alert-sub">SOSのサインかもしれません。様子を気にかけてあげましょう！</p>
+        </div>
+      </div>
+
+      <!-- 今日の体調 -->
+      <section class="today-section">
+        <p class="section-label">今日の体調</p>
+        <div class="today-status" id="todayStatus">
+          <span class="today-emoji" id="todayEmoji">-</span>
+          <span class="today-label" id="todayLabel">未報告</span>
+        </div>
+      </section>
+
+      <!-- カレンダー -->
+      <section class="calendar-section">
+        <div class="calendar-header">
+          <button class="cal-nav" onclick="changeMonth(-1)">◀</button>
+          <span class="cal-title" id="calTitle"></span>
+          <button class="cal-nav" onclick="changeMonth(1)">▶</button>
+        </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+        <div class="cal-legend">
+          <span class="legend-item"><span class="dot" style="background:#FF6B35"></span>元気</span>
+          <span class="legend-item"><span class="dot" style="background:#6BCB77"></span>そこそこ</span>
+          <span class="legend-item"><span class="dot" style="background:#FFD93D"></span>少し悪い</span>
+          <span class="legend-item"><span class="dot" style="background:#C77DFF"></span>体調悪い</span>
+        </div>
+      </section>
+
+      <!-- アドバイス -->
+      <section class="advice-section">
+        <p class="advice-item">☆ 元気・そこそこ元気 → OK</p>
+        <p class="advice-item warn">☆ 少し体調が悪い → 必要に応じて連絡しましょう！</p>
+        <p class="advice-item danger">☆ 体調が悪い → SOSのサインかもしれません！様子を気にかけてあげましょう！</p>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script src="js/watcher.js"></script>
+</body>
+</html>
