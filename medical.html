@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>みまもりアプリ｜医療関係者</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/patient.css" />
+  <link rel="stylesheet" href="css/medical.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="bg-blobs">
+    <div class="blob blob1" style="background: var(--blue);"></div>
+    <div class="blob blob2" style="background: var(--teal);"></div>
+    <div class="blob blob3" style="background: var(--green);"></div>
+  </div>
+
+  <main class="page-container">
+    <div class="page-card">
+      <!-- ヘッダー -->
+      <header class="page-header">
+        <button class="back-btn" onclick="goBackToList()">← もどる</button>
+        <span class="header-badge medical-badge">医療関係者</span>
+      </header>
+
+      <!-- 一覧画面 -->
+      <div id="listView">
+        <section class="medical-title-section">
+          <div class="greeting-icon">🏥</div>
+          <h2 class="greeting-name">ようこそ！登録者一覧</h2>
+          <p class="greeting-text">患者を選択して詳細を確認できます</p>
+        </section>
+
+        <!-- 検索 -->
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="患者検索..." oninput="filterPatients()" />
+        </div>
+
+        <!-- 患者一覧 -->
+        <div class="patient-list" id="patientList"></div>
+      </div>
+
+      <!-- 詳細画面 -->
+      <div id="detailView" style="display:none;">
+        <section class="detail-header-section">
+          <div class="detail-name-row">
+            <span class="detail-emoji" id="detailEmoji"></span>
+            <h2 class="detail-name" id="detailName"></h2>
+          </div>
+          <span class="detail-status-badge" id="detailStatusBadge"></span>
+        </section>
+
+        <div class="detail-cards">
+          <div class="detail-card">
+            <p class="detail-card-title">🏨 〇〇病院</p>
+            <div class="detail-row">
+              <span class="detail-key">最終来院日</span>
+              <span class="detail-val" id="detailLastVisit1"></span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-key">処方薬</span>
+              <span class="detail-val" id="detailMedicine1"></span>
+            </div>
+          </div>
+
+          <div class="detail-card">
+            <p class="detail-card-title">🏥 ××クリニック</p>
+            <div class="detail-row">
+              <span class="detail-key">最終来院日</span>
+              <span class="detail-val" id="detailLastVisit2">-</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-key">処方薬</span>
+              <span class="detail-val" id="detailMedicine2">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 編集フォーム -->
+        <div class="edit-section">
+          <p class="edit-title">✏️ 来院情報を更新（担当医が入力）</p>
+          <div class="edit-form">
+            <div class="edit-field">
+              <label>来院日</label>
+              <input type="date" id="editVisitDate" />
+            </div>
+            <div class="edit-field">
+              <label>処方薬</label>
+              <input type="text" id="editMedicine" placeholder="薬名を入力..." />
+            </div>
+            <div class="edit-field">
+              <label>家族への伝達事項（任意）</label>
+              <input type="text" id="editMessage" placeholder="伝達事項がある場合のみ入力..." />
+            </div>
+            <button class="save-btn" onclick="saveRecord()">保存する</button>
+          </div>
+          <p class="edit-note">※ 伝達事項がある場合のみ、見守る側に通知が届きます</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script src="js/medical.js"></script>
+</body>
+</html>
