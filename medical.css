@@ -1,0 +1,233 @@
+/* ===========================
+   medical.css - 医療関係者
+=========================== */
+
+.medical-title-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 検索バー */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f5f5f5;
+  border-radius: 999px;
+  padding: 10px 16px;
+  margin-bottom: 16px;
+}
+
+.search-icon { font-size: 16px; }
+
+.search-bar input {
+  border: none;
+  background: none;
+  outline: none;
+  font-family: var(--font-main);
+  font-size: 14px;
+  color: var(--text-dark);
+  width: 100%;
+}
+
+/* 患者リスト */
+.patient-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.patient-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: white;
+  border: 2px solid #eee;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.patient-row:hover {
+  border-color: var(--blue);
+  transform: translateX(4px);
+  box-shadow: 0 4px 16px rgba(69,183,209,0.2);
+}
+
+.patient-row-emoji { font-size: 24px; }
+
+.patient-row-info {
+  flex: 1;
+}
+
+.patient-row-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 2px;
+}
+
+.patient-row-age {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.patient-row-status {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: white;
+}
+
+.status-great-bg { background: #FF6B35; }
+.status-good-bg  { background: #6BCB77; }
+.status-bad-bg   { background: #FFD93D; color: var(--text-dark) !important; }
+.status-sick-bg  { background: #C77DFF; }
+
+/* 詳細画面 */
+.detail-header-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.detail-name-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.detail-emoji { font-size: 32px; }
+
+.detail-name {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--text-dark);
+}
+
+.detail-status-badge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+  color: white;
+}
+
+/* 詳細カード */
+.detail-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.detail-card {
+  background: #f9f9f9;
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+}
+
+.detail-card-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-mid);
+  margin-bottom: 10px;
+}
+
+.detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.detail-key {
+  font-size: 12px;
+  color: var(--text-light);
+  flex-shrink: 0;
+  width: 72px;
+}
+
+.detail-val {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.4;
+}
+
+/* 編集フォーム */
+.edit-section {
+  background: #EBF8FF;
+  border-radius: var(--radius-sm);
+  padding: 16px;
+}
+
+.edit-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 14px;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.edit-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.edit-field label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-mid);
+}
+
+.edit-field input {
+  border: 2px solid #ddd;
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-family: var(--font-main);
+  font-size: 14px;
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.edit-field input:focus {
+  border-color: var(--blue);
+}
+
+.save-btn {
+  background: linear-gradient(135deg, var(--blue), var(--teal));
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 12px;
+  font-family: var(--font-main);
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 16px rgba(69,183,209,0.4);
+}
+
+.save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(69,183,209,0.5);
+}
+
+.edit-note {
+  font-size: 11px;
+  color: var(--text-light);
+  text-align: center;
+  line-height: 1.5;
+}
