@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>みまもりアプリ</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="bg-blobs">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+  </div>
+
+  <main class="login-container">
+    <div class="login-card">
+      <div class="logo-area">
+        <div class="logo-icon">🌸</div>
+        <h1 class="app-title">みまもりアプリ</h1>
+        <p class="app-subtitle">孤独死ゼロを目指して、みんなで見守ろう</p>
+      </div>
+
+      <div class="welcome-badge">
+        <span>ようこそ！！</span>
+      </div>
+
+      <p class="role-prompt">あなたはどちらですか？</p>
+
+      <div class="role-buttons">
+        <button class="role-btn patient-btn" onclick="goTo('patient.html')">
+          <span class="btn-icon">😊</span>
+          <span class="btn-main">見守られる側</span>
+          <span class="btn-sub">当事者の方</span>
+          <span class="btn-arrow">→</span>
+        </button>
+
+        <button class="role-btn watcher-btn" onclick="goTo('watcher.html')">
+          <span class="btn-icon">👨‍👩‍👧</span>
+          <span class="btn-main">見守る側</span>
+          <span class="btn-sub">家族・その他の方</span>
+          <span class="btn-arrow">→</span>
+        </button>
+
+        <button class="role-btn medical-btn" onclick="goTo('medical.html')">
+          <span class="btn-icon">🏥</span>
+          <span class="btn-main">医療関係者</span>
+          <span class="btn-sub">かかりつけ医など（任意）</span>
+          <span class="btn-arrow">→</span>
+        </button>
+      </div>
+
+      <p class="footer-note">💡 初回設定は後からでも変更できます</p>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
