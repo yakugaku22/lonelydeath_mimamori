@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>みまもりアプリ｜今日の体調</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/patient.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="bg-blobs">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+  </div>
+
+  <main class="page-container">
+    <div class="page-card">
+      <!-- ヘッダー -->
+      <header class="page-header">
+        <button class="back-btn" onclick="window.location.href='index.html'">← もどる</button>
+        <span class="header-badge patient-badge">見守られる側</span>
+      </header>
+
+      <!-- 挨拶 -->
+      <section class="greeting-section">
+        <div class="greeting-icon">🌞</div>
+        <h2 class="greeting-name" id="patientName">山田太郎さん</h2>
+        <p class="greeting-text">おはようございます！<br />今日の体調はいかがですか？</p>
+      </section>
+
+      <!-- 体調選択 -->
+      <section class="health-section">
+        <p class="health-prompt">今日の体調は？</p>
+        <div class="health-buttons" id="healthButtons">
+          <button class="health-btn" data-status="great" onclick="selectHealth(this)">
+            <span class="health-emoji">😊</span>
+            <span class="health-label">元気</span>
+          </button>
+          <button class="health-btn" data-status="good" onclick="selectHealth(this)">
+            <span class="health-emoji">🙂</span>
+            <span class="health-label">そこそこ元気</span>
+          </button>
+          <button class="health-btn" data-status="bad" onclick="selectHealth(this)">
+            <span class="health-emoji">😟</span>
+            <span class="health-label">少し体調悪い</span>
+          </button>
+          <button class="health-btn" data-status="sick" onclick="selectHealth(this)">
+            <span class="health-emoji">😢</span>
+            <span class="health-label">体調が悪い</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- 送信後メッセージ（初期は非表示） -->
+      <section class="result-section" id="resultSection" style="display:none;">
+        <div class="result-card" id="resultCard">
+          <div class="result-emoji" id="resultEmoji"></div>
+          <p class="result-message" id="resultMessage"></p>
+          <p class="result-sub" id="resultSub"></p>
+        </div>
+        <button class="reset-btn" onclick="resetSelection()">もう一度答える</button>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script src="js/patient.js"></script>
+</body>
+</html>
