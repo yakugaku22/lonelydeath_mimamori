@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>みまもりアプリ｜初回設定（見守る側）</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="patient.css" />
+  <link rel="stylesheet" href="setup.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="bg-blobs">
+    <div class="blob blob1" style="background: var(--green);"></div>
+    <div class="blob blob2" style="background: var(--teal);"></div>
+    <div class="blob blob3" style="background: var(--yellow);"></div>
+  </div>
+
+  <main class="page-container">
+    <div class="page-card setup-card">
+
+      <!-- ヘッダー -->
+      <header class="page-header">
+        <button class="back-btn" onclick="window.location.href='index.html'">← もどる</button>
+        <span class="header-badge watcher-badge">初回設定</span>
+      </header>
+
+      <!-- タイトル -->
+      <div class="setup-title-area">
+        <div class="setup-icon">📋</div>
+        <h2 class="setup-title">見守る側の情報を登録しましょう</h2>
+        <p class="setup-subtitle">設定は後から変更できます</p>
+      </div>
+
+      <!-- ステップインジケーター -->
+      <div class="step-indicator">
+        <div class="step active" id="step-dot-1">1</div>
+        <div class="step-line"></div>
+        <div class="step" id="step-dot-2">2</div>
+        <div class="step-line"></div>
+        <div class="step" id="step-dot-3">3</div>
+      </div>
+
+      <!-- ステップ1: 基本情報 -->
+      <div class="setup-step" id="step-1">
+        <h3 class="step-title">👤 あなたの情報</h3>
+        <div class="form-group">
+          <label class="form-label">お名前 <span class="required">必須</span></label>
+          <input type="text" id="w-name" class="form-input" placeholder="例：山田 花子" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">見守り対象との続柄 <span class="required">必須</span></label>
+          <div class="select-chips" id="relation-chips">
+            <button class="chip" onclick="selectChip(this, 'relation')">長男</button>
+            <button class="chip" onclick="selectChip(this, 'relation')">長女</button>
+            <button class="chip" onclick="selectChip(this, 'relation')">次男</button>
+            <button class="chip" onclick="selectChip(this, 'relation')">次女</button>
+            <button class="chip" onclick="selectChip(this, 'relation')">配偶者</button>
+            <button class="chip" onclick="selectChip(this, 'relation')">兄弟・姉妹</button>
+            <button class="chip" onclick="selectChip(this, 'relation')">知人・その他</button>
+          </div>
+          <input type="text" id="w-relation" class="form-input" placeholder="その他の場合はこちらに入力" style="margin-top:8px;" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">連絡先（電話番号）</label>
+          <input type="tel" id="w-tel" class="form-input" placeholder="例：090-0000-0000" />
+        </div>
+        <button class="next-btn" onclick="nextStep(1)">次へ →</button>
+      </div>
+
+      <!-- ステップ2: 通知設定 -->
+      <div class="setup-step hidden" id="step-2">
+        <h3 class="step-title">🔔 通知設定</h3>
+        <p class="step-desc">どの体調のときに通知を受け取りますか？</p>
+
+        <div class="notify-options">
+          <label class="notify-option">
+            <input type="checkbox" id="notify-great" />
+            <div class="notify-card">
+              <span class="notify-emoji">😊</span>
+              <div>
+                <p class="notify-name">元気</p>
+                <p class="notify-desc">毎日の元気報告を受け取る</p>
+              </div>
+            </div>
+          </label>
+
+          <label class="notify-option">
+            <input type="checkbox" id="notify-good" />
+            <div class="notify-card">
+              <span class="notify-emoji">🙂</span>
+              <div>
+                <p class="notify-name">そこそこ元気</p>
+                <p class="notify-desc">そこそこ元気の報告を受け取る</p>
+              </div>
+            </div>
+          </label>
+
+          <label class="notify-option">
+            <input type="checkbox" id="notify-bad" checked />
+            <div class="notify-card notify-card-warn">
+              <span class="notify-emoji">😟</span>
+              <div>
+                <p class="notify-name">少し体調悪い</p>
+                <p class="notify-desc">体調不良の報告を受け取る（推奨）</p>
+              </div>
+            </div>
+          </label>
+
+          <label class="notify-option">
+            <input type="checkbox" id="notify-sick" checked />
+            <div class="notify-card notify-card-danger">
+              <span class="notify-emoji">😢</span>
+              <div>
+                <p class="notify-name">体調が悪い</p>
+                <p class="notify-desc">緊急アラートを受け取る（推奨）</p>
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <div class="no-report-setting">
+          <label class="form-label" style="margin-bottom:8px;">未報告アラート</label>
+          <p class="step-desc">何日間報告がなければアラートを出しますか？</p>
+          <div class="select-chips">
+            <button class="chip active" onclick="selectChip(this, 'no-report')" data-val="1">1日</button>
+            <button class="chip" onclick="selectChip(this, 'no-report')" data-val="2">2日</button>
+            <button class="chip" onclick="selectChip(this, 'no-report')" data-val="3">3日</button>
+            <button class="chip" onclick="selectChip(this, 'no-report')" data-val="0">設定しない</button>
+          </div>
+        </div>
+
+        <div class="step-nav">
+          <button class="back-step-btn" onclick="prevStep(2)">← 戻る</button>
+          <button class="next-btn" onclick="nextStep(2)">次へ →</button>
+        </div>
+      </div>
+
+      <!-- ステップ3: ペアリングコード -->
+      <div class="setup-step hidden" id="step-3">
+        <h3 class="step-title">🔗 当事者と繋がろう</h3>
+        <p class="step-desc">見守り対象の方が設定したコードを入力してください。同じコードでペアリングできます</p>
+
+        <div class="form-group">
+          <label class="form-label">ペアリングコード <span class="required">必須</span></label>
+          <input type="text" id="w-pair-code" class="form-input code-input" placeholder="例：yamada2026" maxlength="20" />
+        </div>
+
+        <div class="pair-result hidden" id="pairResult">
+          <span class="pair-result-icon">✅</span>
+          <span class="pair-result-text" id="pairResultText"></span>
+        </div>
+
+        <div class="step-nav">
+          <button class="back-step-btn" onclick="prevStep(3)">← 戻る</button>
+          <button class="complete-btn" onclick="completeSetup()">設定完了 🎉</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="main.js"></script>
+  <script src="setup-watcher.js"></script>
+</body>
+</html>
