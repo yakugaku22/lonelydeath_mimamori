@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>みまもりアプリ｜初回設定（当事者）</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="patient.css" />
+  <link rel="stylesheet" href="setup.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="bg-blobs">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+  </div>
+
+  <main class="page-container">
+    <div class="page-card setup-card">
+
+      <!-- ヘッダー -->
+      <header class="page-header">
+        <button class="back-btn" onclick="window.location.href='index.html'">← もどる</button>
+        <span class="header-badge patient-badge">初回設定</span>
+      </header>
+
+      <!-- タイトル -->
+      <div class="setup-title-area">
+        <div class="setup-icon">📋</div>
+        <h2 class="setup-title">あなたの情報を登録しましょう</h2>
+        <p class="setup-subtitle">設定は後から変更できます</p>
+      </div>
+
+      <!-- ステップインジケーター -->
+      <div class="step-indicator">
+        <div class="step active" id="step-dot-1">1</div>
+        <div class="step-line"></div>
+        <div class="step" id="step-dot-2">2</div>
+        <div class="step-line"></div>
+        <div class="step" id="step-dot-3">3</div>
+        <div class="step-line"></div>
+        <div class="step" id="step-dot-4">4</div>
+      </div>
+
+      <!-- ステップ1: 基本情報 -->
+      <div class="setup-step" id="step-1">
+        <h3 class="step-title">👤 基本情報</h3>
+        <div class="form-group">
+          <label class="form-label">お名前 <span class="required">必須</span></label>
+          <input type="text" id="p-name" class="form-input" placeholder="例：山田 太郎" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">生年月日 <span class="required">必須</span></label>
+          <input type="date" id="p-birthday" class="form-input" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">性別</label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="p-gender" value="男性" /> 男性</label>
+            <label class="radio-label"><input type="radio" name="p-gender" value="女性" /> 女性</label>
+            <label class="radio-label"><input type="radio" name="p-gender" value="その他" /> その他</label>
+          </div>
+        </div>
+        <button class="next-btn" onclick="nextStep(1)">次へ →</button>
+      </div>
+
+      <!-- ステップ2: 緊急連絡先 -->
+      <div class="setup-step hidden" id="step-2">
+        <h3 class="step-title">📞 緊急連絡先</h3>
+        <p class="step-desc">体調が悪いときに連絡する方の情報を入力してください</p>
+        <div class="form-group">
+          <label class="form-label">緊急連絡先のお名前</label>
+          <input type="text" id="p-emergency-name" class="form-input" placeholder="例：山田 花子" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">続柄</label>
+          <input type="text" id="p-emergency-relation" class="form-input" placeholder="例：長女" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">電話番号</label>
+          <input type="tel" id="p-emergency-tel" class="form-input" placeholder="例：090-0000-0000" />
+        </div>
+        <div class="step-nav">
+          <button class="back-step-btn" onclick="prevStep(2)">← 戻る</button>
+          <button class="next-btn" onclick="nextStep(2)">次へ →</button>
+        </div>
+      </div>
+
+      <!-- ステップ3: かかりつけ医 -->
+      <div class="setup-step hidden" id="step-3">
+        <h3 class="step-title">🏥 かかりつけ医の情報</h3>
+        <p class="step-desc">任意入力です。スキップもできます</p>
+        <div class="form-group">
+          <label class="form-label">病院・クリニック名</label>
+          <input type="text" id="p-hospital" class="form-input" placeholder="例：〇〇内科クリニック" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">担当医のお名前</label>
+          <input type="text" id="p-doctor" class="form-input" placeholder="例：鈴木先生" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">病院の電話番号</label>
+          <input type="tel" id="p-hospital-tel" class="form-input" placeholder="例：06-0000-0000" />
+        </div>
+        <div class="step-nav">
+          <button class="back-step-btn" onclick="prevStep(3)">← 戻る</button>
+          <button class="next-btn" onclick="nextStep(3)">次へ →</button>
+        </div>
+      </div>
+
+      <!-- ステップ4: ペアリングコード -->
+      <div class="setup-step hidden" id="step-4">
+        <h3 class="step-title">🔗 みんなと繋がろう</h3>
+        <p class="step-desc">このコードを<strong>見守る側（家族など）</strong>と<strong>医療関係者</strong>に伝えてください。同じコードを入力することであなたの情報を共有できます</p>
+
+        <div class="pair-code-display" id="generatedCode"></div>
+        <div class="pair-share-targets"><div class="share-target"><span>👨‍👩‍👧</span><span>見守る側（家族・支援者）に伝える</span></div><div class="share-target"><span>🏥</span><span>医療関係者（かかりつけ医など）に伝える</span></div></div>
+
+        <div class="form-group" style="margin-top: 20px;">
+          <label class="form-label">または、ペアリングコードを自分で決める</label>
+          <div class="code-input-row">
+            <input type="text" id="p-pair-code" class="form-input code-input" placeholder="例：yamada2026" maxlength="20" />
+            <button class="generate-btn" onclick="generateCode()">自動生成</button>
+          </div>
+        </div>
+
+        <div class="step-nav">
+          <button class="back-step-btn" onclick="prevStep(4)">← 戻る</button>
+          <button class="complete-btn" onclick="completeSetup()">設定完了 🎉</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="main.js"></script>
+  <script src="setup-patient.js"></script>
+</body>
+</html>
