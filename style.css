@@ -35,7 +35,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   position: relative;
 }
 
@@ -312,4 +313,189 @@ body {
   .app-title {
     font-size: 24px;
   }
+}
+
+/* ===========================
+   設定状況バッジ
+=========================== */
+.setup-status {
+  margin-bottom: 12px;
+}
+
+.status-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-light);
+  text-align: center;
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f5f5f5;
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--text-mid);
+  margin-bottom: 6px;
+}
+
+.status-badge span:first-child { font-size: 16px; }
+.status-badge span:nth-child(2) { flex: 1; font-weight: 700; }
+
+.status-done {
+  font-size: 11px;
+  color: var(--green);
+  font-weight: 700;
+}
+
+/* ===========================
+   リセットボタン
+=========================== */
+.reset-area {
+  margin-top: 8px;
+  text-align: center;
+}
+
+.reset-all-btn {
+  background: none;
+  border: 1.5px solid #ddd;
+  border-radius: 999px;
+  padding: 7px 18px;
+  font-family: var(--font-main);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.reset-all-btn:hover {
+  border-color: #FF6B6B;
+  color: #FF6B6B;
+}
+
+/* ===========================
+   リセット確認モーダル
+=========================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modal-card {
+  background: white;
+  border-radius: 24px;
+  padding: 32px 28px;
+  max-width: 320px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  animation: cardEnter 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.modal-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.modal-title {
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+.modal-desc {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.modal-btns {
+  display: flex;
+  gap: 10px;
+}
+
+.modal-cancel {
+  flex: 1;
+  padding: 11px;
+  border: 2px solid #eee;
+  border-radius: 999px;
+  background: white;
+  font-family: var(--font-main);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.modal-cancel:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.modal-confirm {
+  flex: 1;
+  padding: 11px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+  font-family: var(--font-main);
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(255,107,107,0.4);
+}
+
+.modal-confirm:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255,107,107,0.5);
+}
+
+/* 個別リセットボタン */
+.status-badge {
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.status-badge-name {
+  flex: 1;
+}
+
+.individual-reset-btn {
+  background: none;
+  border: 1.5px solid var(--btn-color, #ddd);
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--btn-color, #aaa);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.individual-reset-btn:hover {
+  background: var(--btn-color, #ddd);
+  color: white;
 }
