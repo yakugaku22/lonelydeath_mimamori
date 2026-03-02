@@ -21,12 +21,35 @@
       <header class="page-header">
         <button class="back-btn" onclick="window.location.href='index.html'">← もどる</button>
         <span class="header-badge patient-badge">見守られる側</span>
+        <button class="profile-btn patient-profile-btn" onclick="togglePairCode()" id="pairCodeToggleBtn">🔗 コード確認</button>
       </header>
+
+      <!-- ペアリングコード表示パネル -->
+      <div class="pair-code-panel hidden" id="pairCodePanel">
+        <div class="pair-code-panel-inner">
+          <p class="pair-code-panel-title">🔗 あなたのペアリングコード</p>
+          <div class="pair-code-display-lg" id="pairCodeDisplay">-</div>
+          <p class="pair-code-panel-desc">このコードを<strong>家族・支援者</strong>や<strong>かかりつけ医</strong>に伝えてください</p>
+          <div class="pair-share-tags">
+            <span class="pair-tag">👨‍👩‍👧 見守る側</span>
+            <span class="pair-tag">🏥 医療関係者</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 医師からの通知バナー -->
+      <div class="alert-banner medical-notify-banner" id="patientMedicalBanner" style="display:none;">
+        <span class="alert-icon">🏥</span>
+        <div>
+          <p class="alert-title" id="patientMedicalSender"></p>
+          <p class="alert-sub"   id="patientMedicalText"></p>
+        </div>
+      </div>
 
       <!-- 挨拶 -->
       <section class="greeting-section">
         <div class="greeting-icon">🌞</div>
-        <h2 class="greeting-name" id="patientName">山田太郎さん</h2>
+        <h2 class="greeting-name" id="patientName"></h2>
         <p class="greeting-text">おはようございます！<br />今日の体調はいかがですか？</p>
       </section>
 
@@ -60,7 +83,7 @@
           <p class="result-message" id="resultMessage"></p>
           <p class="result-sub" id="resultSub"></p>
         </div>
-        <button class="reset-btn" onclick="resetSelection()">もう一度答える</button>
+        <button class="reset-btn" id="resetBtn" onclick="resetSelection()">もう一度答える</button>
       </section>
     </div>
   </main>
