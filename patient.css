@@ -12,8 +12,10 @@
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  padding-top: 24px;
+  padding-bottom: 40px;
 }
 
 .page-card {
@@ -206,4 +208,99 @@
 .reset-btn:hover {
   border-color: var(--orange);
   color: var(--orange);
+}
+
+/* ===========================
+   ペアリングコードパネル
+=========================== */
+.patient-profile-btn {
+  background: none;
+  border: 2px solid #e0e0e0;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-family: var(--font-main);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.patient-profile-btn:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.pair-code-panel {
+  overflow: hidden;
+  max-height: 300px;
+  opacity: 1;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  margin-bottom: 16px;
+}
+.pair-code-panel.hidden {
+  max-height: 0;
+  opacity: 0;
+  margin-bottom: 0;
+}
+
+.pair-code-panel-inner {
+  background: linear-gradient(135deg, #FFF3E0, #FFE0CC);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  text-align: center;
+}
+
+.pair-code-panel-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-mid);
+  margin-bottom: 10px;
+}
+
+.pair-code-display-lg {
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--orange);
+  letter-spacing: 0.18em;
+  background: white;
+  border: 2px dashed var(--orange);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  word-break: break-all;
+}
+
+.pair-code-panel-desc {
+  font-size: 12px;
+  color: var(--text-mid);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.pair-share-tags {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.pair-tag {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  background: white;
+  border-radius: 999px;
+  color: var(--text-mid);
+  border: 1.5px solid #e0e0e0;
+}
+
+/* 医師からの通知バナー（見守られる側） */
+.medical-notify-banner {
+  background: linear-gradient(135deg, #E3F2FD, #E8F5E9) !important;
+}
+.medical-notify-banner .alert-title {
+  color: #1565C0;
+}
+.medical-notify-banner .alert-sub {
+  color: #1B5E20;
 }
