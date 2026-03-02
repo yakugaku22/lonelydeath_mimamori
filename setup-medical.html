@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>みまもりアプリ｜初回設定（医療関係者）</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="patient.css" />
+  <link rel="stylesheet" href="setup.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="bg-blobs">
+    <div class="blob blob1" style="background: var(--blue);"></div>
+    <div class="blob blob2" style="background: var(--teal);"></div>
+    <div class="blob blob3" style="background: var(--green);"></div>
+  </div>
+
+  <main class="page-container">
+    <div class="page-card setup-card">
+
+      <!-- ヘッダー -->
+      <header class="page-header">
+        <button class="back-btn" onclick="window.location.href='index.html'">← もどる</button>
+        <span class="header-badge medical-badge">初回設定</span>
+      </header>
+
+      <!-- タイトル -->
+      <div class="setup-title-area">
+        <div class="setup-icon">🏥</div>
+        <h2 class="setup-title">医療関係者の情報を登録しましょう</h2>
+        <p class="setup-subtitle">設定は後から変更できます</p>
+      </div>
+
+      <!-- ステップインジケーター -->
+      <div class="step-indicator">
+        <div class="step active" id="step-dot-1">1</div>
+        <div class="step-line"></div>
+        <div class="step" id="step-dot-2">2</div>
+      </div>
+
+      <!-- ステップ1: 基本情報 -->
+      <div class="setup-step" id="step-1">
+        <h3 class="step-title">👨‍⚕️ あなたの情報</h3>
+        <div class="form-group">
+          <label class="form-label">お名前 <span class="required">必須</span></label>
+          <input type="text" id="m-name" class="form-input" placeholder="例：鈴木 一郎" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">所属機関 <span class="required">必須</span></label>
+          <input type="text" id="m-institution" class="form-input" placeholder="例：〇〇内科クリニック" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">役職・専門</label>
+          <input type="text" id="m-role" class="form-input" placeholder="例：内科医、看護師、ケアマネージャー" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">連絡先（電話番号）</label>
+          <input type="tel" id="m-tel" class="form-input" placeholder="例：06-0000-0000" />
+        </div>
+        <button class="next-btn" onclick="nextStep(1)">次へ →</button>
+      </div>
+
+      <!-- ステップ2: 患者とのペアリング -->
+      <div class="setup-step hidden" id="step-2">
+        <h3 class="step-title">🔗 患者と繋がろう</h3>
+        <p class="step-desc">担当患者の方が設定したペアリングコードを入力してください。患者の体調情報や来院履歴を確認できるようになります</p>
+
+        <div class="info-box">
+          <span class="info-icon">💡</span>
+          <p class="info-text">コードは患者本人の初回設定画面に表示されています。患者または家族に確認してください。<br />複数の患者を担当する場合は、後からそれぞれのコードを追加できます。</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">ペアリングコード</label>
+          <div class="code-input-row">
+            <input type="text" id="m-pair-code" class="form-input code-input" placeholder="例：yamada2026" maxlength="20" />
+            <button class="generate-btn" onclick="checkPairCode()">確認</button>
+          </div>
+        </div>
+
+        <div class="pair-result hidden" id="pairResult">
+          <span class="pair-result-icon" id="pairIcon"></span>
+          <span class="pair-result-text" id="pairResultText"></span>
+        </div>
+
+        <!-- 追加済み患者リスト -->
+        <div class="added-patients" id="addedPatients" style="display:none;">
+          <p class="added-patients-title">追加済み患者</p>
+          <div id="addedPatientsList"></div>
+        </div>
+
+        <div class="step-nav">
+          <button class="back-step-btn" onclick="prevStep(2)">← 戻る</button>
+          <button class="complete-btn" onclick="completeSetup()">設定完了 🎉</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="main.js"></script>
+  <script src="setup-medical.js"></script>
+</body>
+</html>
