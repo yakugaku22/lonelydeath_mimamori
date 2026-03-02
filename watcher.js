@@ -18,18 +18,15 @@ function getEl(id) { return document.getElementById(id); }
  */
 function renderTodayStatusBanner(status) {
   const banner  = getEl('todayStatusBanner');
-  const emojiEl = getEl('tsbEmoji');
   const textEl  = getEl('tsbText');
   if (!banner) return;
 
   if (status) {
     const data = AppData.healthStatus[status];
-    if (emojiEl) emojiEl.textContent = data.emoji;
-    if (textEl)  textEl.textContent  = data.label;
+    if (textEl) textEl.textContent = data.labelText || data.label;
     banner.className = `today-status-banner tsb-${status}`;
   } else {
-    if (emojiEl) emojiEl.textContent = '－';
-    if (textEl)  textEl.textContent  = '未報告';
+    if (textEl) textEl.textContent = '未報告';
     banner.className = 'today-status-banner tsb-none';
   }
 }
