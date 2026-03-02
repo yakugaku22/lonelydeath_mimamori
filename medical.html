@@ -18,6 +18,7 @@
 
   <main class="page-container">
     <div class="page-card">
+
       <!-- ヘッダー -->
       <header class="page-header">
         <button class="back-btn" onclick="goBackToList()">← もどる</button>
@@ -28,9 +29,19 @@
       <div id="listView">
         <section class="medical-title-section">
           <div class="greeting-icon">🏥</div>
-          <h2 class="greeting-name">ようこそ！登録者一覧</h2>
-          <p class="greeting-text">患者を選択して詳細を確認できます</p>
+          <h2 class="greeting-name">登録者一覧</h2>
+          <p class="greeting-text" id="medicalName"></p>
+          <button class="add-patient-btn" onclick="openAddModal()">＋ 患者を追加</button>
         </section>
+
+        <!-- 今日のステータスバナー -->
+        <div class="today-status-banner" id="todayStatusBanner">
+          <span class="tsb-label">今日のステータス（最新患者）</span>
+          <div class="tsb-content">
+            <span class="tsb-emoji" id="tsbEmoji">－</span>
+            <span class="tsb-text"  id="tsbText">未報告</span>
+          </div>
+        </div>
 
         <!-- 検索 -->
         <div class="search-bar">
@@ -38,7 +49,7 @@
           <input type="text" id="searchInput" placeholder="患者検索..." oninput="filterPatients()" />
         </div>
 
-        <!-- 患者一覧 -->
+        <!-- 患者一覧（localStorageから動的生成） -->
         <div class="patient-list" id="patientList"></div>
       </div>
 
@@ -52,36 +63,26 @@
           <span class="detail-status-badge" id="detailStatusBadge"></span>
         </section>
 
-        <div class="detail-cards">
-          <div class="detail-card">
-            <p class="detail-card-title">🏨 〇〇病院</p>
-            <div class="detail-row">
-              <span class="detail-key">最終来院日</span>
-              <span class="detail-val" id="detailLastVisit1"></span>
-            </div>
-            <div class="detail-row">
-              <span class="detail-key">処方薬</span>
-              <span class="detail-val" id="detailMedicine1"></span>
-            </div>
-          </div>
-
-          <div class="detail-card">
-            <p class="detail-card-title">🏥 ××クリニック</p>
-            <div class="detail-row">
-              <span class="detail-key">最終来院日</span>
-              <span class="detail-val" id="detailLastVisit2">-</span>
-            </div>
-            <div class="detail-row">
-              <span class="detail-key">処方薬</span>
-              <span class="detail-val" id="detailMedicine2">-</span>
-            </div>
+        <!-- 今日のステータスバナー（詳細） -->
+        <div class="today-status-banner" id="detailStatusBanner">
+          <span class="tsb-label">今日のステータス</span>
+          <div class="tsb-content">
+            <span class="tsb-emoji" id="detailTsbEmoji">－</span>
+            <span class="tsb-text"  id="detailTsbText">未報告</span>
           </div>
         </div>
 
-        <!-- 編集フォーム -->
+        <!-- 来院・処方カード（動的描画） -->
+        <div class="detail-cards" id="hospitalCards"></div>
+
+        <!-- 入力フォーム -->
         <div class="edit-section">
-          <p class="edit-title">✏️ 来院情報を更新（担当医が入力）</p>
+          <p class="edit-title">✏️ 来院情報を入力・更新</p>
           <div class="edit-form">
+            <div class="edit-field">
+              <label>医療機関名</label>
+              <input type="text" id="editHospital" placeholder="例：〇〇内科クリニック" />
+            </div>
             <div class="edit-field">
               <label>来院日</label>
               <input type="date" id="editVisitDate" />
@@ -102,6 +103,23 @@
 
     </div>
   </main>
+
+  <!-- 患者追加モーダル -->
+  <div class="modal-overlay" id="addPatientModal" style="display:none;">
+    <div class="modal-card">
+      <div class="modal-icon">🔗</div>
+      <h3 class="modal-title">患者を追加</h3>
+      <p class="modal-desc">患者の方のペアリングコードを入力してください</p>
+      <input type="text" id="addPairCode" class="form-input code-input"
+             placeholder="例：yamada2026" maxlength="20"
+             style="margin-bottom:12px; font-family:inherit;" />
+      <div class="add-patient-result hidden" id="addPatientResult"></div>
+      <div class="modal-btns" style="margin-top:16px;">
+        <button class="modal-cancel" onclick="closeAddModal()">キャンセル</button>
+        <button class="modal-confirm" onclick="executeAddPatient()">追加する</button>
+      </div>
+    </div>
+  </div>
 
   <script src="main.js"></script>
   <script src="medical.js"></script>
