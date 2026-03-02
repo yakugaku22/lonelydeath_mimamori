@@ -18,11 +18,22 @@
 
   <main class="page-container">
     <div class="page-card">
+
       <!-- ヘッダー -->
       <header class="page-header">
         <button class="back-btn" onclick="window.location.href='index.html'">← もどる</button>
         <span class="header-badge watcher-badge">見守る側</span>
+        <button class="profile-btn" onclick="toggleProfile()" id="profileToggleBtn">👤 登録情報</button>
       </header>
+
+      <!-- ===== 登録情報パネル（トグル） ===== -->
+      <div class="profile-panel hidden" id="profilePanel">
+        <div class="profile-panel-inner">
+          <h3 class="profile-panel-title">📋 あなたの登録情報</h3>
+          <div class="profile-rows" id="profileRows"></div>
+          <button class="profile-edit-btn" onclick="window.location.href='setup-watcher.html'">✏️ 設定を変更する</button>
+        </div>
+      </div>
 
       <!-- タイトル -->
       <section class="watcher-title-section">
@@ -30,7 +41,25 @@
         <h2 class="greeting-name" id="watcherTitle">〇〇さんのデータ</h2>
       </section>
 
-      <!-- 通知バナー（体調が悪いとき） -->
+      <!-- 今日のステータスバナー -->
+      <div class="today-status-banner" id="todayStatusBanner">
+        <span class="tsb-label">今日のステータス</span>
+        <div class="tsb-content">
+          <span class="tsb-emoji" id="tsbEmoji">－</span>
+          <span class="tsb-text"  id="tsbText">未報告</span>
+        </div>
+      </div>
+
+      <!-- 医療者からの通知バナー -->
+      <div class="alert-banner" id="medicalNotifyBanner" style="display:none;">
+        <span class="alert-icon">🏥</span>
+        <div>
+          <p class="alert-title">医療関係者からのお知らせ</p>
+          <p class="alert-sub" id="medicalNotifyText"></p>
+        </div>
+      </div>
+
+      <!-- 体調が悪いときのアラートバナー -->
       <div class="alert-banner" id="alertBanner" style="display:none;">
         <span class="alert-icon">🚨</span>
         <div>
@@ -38,15 +67,6 @@
           <p class="alert-sub">SOSのサインかもしれません。様子を気にかけてあげましょう！</p>
         </div>
       </div>
-
-      <!-- 今日の体調 -->
-      <section class="today-section">
-        <p class="section-label">今日の体調</p>
-        <div class="today-status" id="todayStatus">
-          <span class="today-emoji" id="todayEmoji">-</span>
-          <span class="today-label" id="todayLabel">未報告</span>
-        </div>
-      </section>
 
       <!-- カレンダー -->
       <section class="calendar-section">
@@ -70,6 +90,7 @@
         <p class="advice-item warn">☆ 少し体調が悪い → 必要に応じて連絡しましょう！</p>
         <p class="advice-item danger">☆ 体調が悪い → SOSのサインかもしれません！様子を気にかけてあげましょう！</p>
       </section>
+
     </div>
   </main>
 
