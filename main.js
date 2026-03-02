@@ -29,10 +29,10 @@ function goTo(role) {
 // ===========================
 const AppData = {
   healthStatus: {
-    great: { label: '元気 😊',        color: '#FF6B35', emoji: '😊' },
-    good:  { label: 'そこそこ元気 🙂', color: '#6BCB77', emoji: '🙂' },
-    bad:   { label: '少し体調悪い 😟', color: '#FFD93D', emoji: '😟' },
-    sick:  { label: '体調が悪い 😢',   color: '#C77DFF', emoji: '😢' },
+    great: { label: '元気 😊',        labelText: '元気 😊',        color: '#FF6B35', emoji: '😊' },
+    good:  { label: 'そこそこ元気 🙂', labelText: 'そこそこ元気 🙂', color: '#6BCB77', emoji: '🙂' },
+    bad:   { label: '少し体調悪い 😟', labelText: '少し体調悪い 😟', color: '#FFD93D', emoji: '😟' },
+    sick:  { label: '体調が悪い 😢',   labelText: '体調が悪い 😢',   color: '#C77DFF', emoji: '😢' },
   },
 };
 
