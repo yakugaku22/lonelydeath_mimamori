@@ -26,24 +26,24 @@
         <span>ようこそ！！</span>
       </div>
 
-      <p class="role-prompt">あなたはどちらですか？</p>
+      <p class="role-prompt">あなたの立場を選択してください</p>
 
       <div class="role-buttons">
-        <button class="role-btn patient-btn" onclick="goTo('patient.html')">
+        <button class="role-btn patient-btn" onclick="goTo('patient')">
           <span class="btn-icon">😊</span>
           <span class="btn-main">見守られる側</span>
           <span class="btn-sub">当事者の方</span>
           <span class="btn-arrow">→</span>
         </button>
 
-        <button class="role-btn watcher-btn" onclick="goTo('watcher.html')">
+        <button class="role-btn watcher-btn" onclick="goTo('watcher')">
           <span class="btn-icon">👨‍👩‍👧</span>
           <span class="btn-main">見守る側</span>
           <span class="btn-sub">家族・その他の方</span>
           <span class="btn-arrow">→</span>
         </button>
 
-        <button class="role-btn medical-btn" onclick="goTo('medical.html')">
+        <button class="role-btn medical-btn" onclick="goTo('medical')">
           <span class="btn-icon">🏥</span>
           <span class="btn-main">医療関係者</span>
           <span class="btn-sub">かかりつけ医など（任意）</span>
@@ -51,10 +51,34 @@
         </button>
       </div>
 
+      <!-- 設定状況バッジ -->
+      <div class="setup-status" id="setupStatus"></div>
+
       <p class="footer-note">💡 初回設定は後からでも変更できます</p>
+
+      <!-- リセットボタン -->
+      <div class="reset-area" id="resetArea" style="display:none;">
+        <button class="reset-all-btn" onclick="confirmReset()">
+          🔄 全ての設定をリセット
+        </button>
+      </div>
     </div>
   </main>
 
+  <!-- リセット確認モーダル -->
+  <div class="modal-overlay" id="resetModal" style="display:none;">
+    <div class="modal-card">
+      <div class="modal-icon" id="resetModalIcon">⚠️</div>
+      <h3 class="modal-title" id="resetModalTitle">設定をリセットしますか？</h3>
+      <p class="modal-desc" id="resetModalDesc">保存されている設定情報が削除されます。</p>
+      <div class="modal-btns">
+        <button class="modal-cancel" onclick="closeModal()">キャンセル</button>
+        <button class="modal-confirm" onclick="executeReset()">リセットする</button>
+      </div>
+    </div>
+  </div>
+
   <script src="main.js"></script>
+  <script src="index.js"></script>
 </body>
 </html>
