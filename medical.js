@@ -70,9 +70,9 @@ function showDetail(id) {
   document.getElementById('detailEmoji').textContent = statusData.emoji;
   document.getElementById('detailName').textContent  = p.name + 'さん';
 
+  // 右上バッジは非表示
   const badge = document.getElementById('detailStatusBadge');
-  badge.textContent = statusData.label;
-  badge.className   = `detail-status-badge ${statusBgClass[p.status]}`;
+  if (badge) badge.style.display = 'none';
 
   // 詳細のステータスバナー更新
   const detailBanner  = document.getElementById('detailStatusBanner');
@@ -80,8 +80,7 @@ function showDetail(id) {
   const detailTextEl  = document.getElementById('detailTsbText');
   if (detailBanner) {
     const data = AppData.healthStatus[p.status];
-    if (detailEmojiEl) detailEmojiEl.textContent = data.emoji;
-    if (detailTextEl)  detailTextEl.textContent  = data.label;
+    if (detailTextEl) detailTextEl.textContent = data.labelText || data.label;
     detailBanner.className = `today-status-banner tsb-${p.status}`;
   }
 
@@ -282,12 +281,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (currentPatients.length > 0) {
     const first   = currentPatients[0];
     const banner  = document.getElementById('todayStatusBanner');
-    const emojiEl = document.getElementById('tsbEmoji');
-    const textEl  = document.getElementById('tsbText');
+    const textEl = document.getElementById('tsbText');
     if (banner && first.status) {
       const data = AppData.healthStatus[first.status];
-      if (emojiEl) emojiEl.textContent = data.emoji;
-      if (textEl)  textEl.textContent  = data.label;
+      if (textEl) textEl.textContent = data.labelText || data.label;
       banner.className = `today-status-banner tsb-${first.status}`;
     }
   }
