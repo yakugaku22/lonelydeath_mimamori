@@ -499,3 +499,12 @@ body {
   background: var(--btn-color, #ddd);
   color: white;
 }
+
+/* ようこそテキスト（バッジなし） */
+.welcome-text {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--orange);
+  margin-bottom: 8px;
+}
