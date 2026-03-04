@@ -43,6 +43,7 @@ function renderPatientList(patients) {
         <p class="patient-row-age">${p.age}才</p>
       </div>
       <span class="patient-row-status ${statusBgClass[p.status]}">${statusData.label}</span>
+      <button class="patient-delete-btn" onclick="event.stopPropagation(); confirmDeletePatient('${p.id}', '${p.name}')">🗑️</button>
     `;
     listEl.appendChild(row);
   });
@@ -118,7 +119,10 @@ function renderHospitalCards(p) {
     const card = document.createElement('div');
     card.className = 'detail-card';
     card.innerHTML = `
-      <p class="detail-card-title">🏥 ${h.name || '医療機関' + (idx + 1)}</p>
+      <div class="detail-card-header">
+        <p class="detail-card-title">🏥 ${h.name || '医療機関' + (idx + 1)}</p>
+        <button class="hospital-edit-btn" onclick="startEditHospital(${idx})">✏️ 編集</button>
+      </div>
       <div class="detail-row">
         <span class="detail-key">最終来院日</span>
         <span class="detail-val">${h.lastVisit || '-'}</span>
@@ -146,18 +150,29 @@ function saveRecord() {
   const p = currentPatients.find(pt => pt.id === selectedPatientId);
   if (!p) return;
 
-  // 同じ医療機関があれば更新、なければ追加
   const hospitals = p.hospitals || [];
-  const existing  = hospitals.find(h => h.name === hospital);
-  if (existing) {
-    existing.lastVisit = visitDate;
-    if (medicine) existing.medicine = medicine;
-  } else {
-    hospitals.push({
-      name:      hospital || '医療機関',
+
+  if (editingHospitalIdx >= 0 && hospitals[editingHospitalIdx]) {
+    // 既存レコードを上書き編集
+    hospitals[editingHospitalIdx] = {
+      name:      hospital || hospitals[editingHospitalIdx].name,
       lastVisit: visitDate,
       medicine:  medicine || '',
-    });
+    };
+    editingHospitalIdx = -1; // 編集モード解除
+  } else {
+    // 同名機関があれば更新、なければ新規追加
+    const existing = hospitals.find(h => h.name === hospital);
+    if (existing) {
+      existing.lastVisit = visitDate;
+      if (medicine) existing.medicine = medicine;
+    } else {
+      hospitals.push({
+        name:      hospital || '医療機関',
+        lastVisit: visitDate,
+        medicine:  medicine || '',
+      });
+    }
   }
   p.hospitals = hospitals;
 
@@ -201,6 +216,56 @@ function goBackToList() {
     window.location.href = 'index.html';
   }
 }
+
+/**
+ * 患者削除の確認
+ */
+function confirmDeletePatient(patientId, patientName) {
+  if (!confirm(`${patientName}さんを一覧から削除しますか？
+来院記録も削除されます。`)) return;
+
+  // medicalSetup.patientsから削除
+  const medical = Store.getMedical();
+  if (!medical) return;
+  medical.patients = (medical.patients || []).filter(p => p.pairCode !== patientId);
+  localStorage.setItem('medicalSetup', JSON.stringify(medical));
+
+  // medicalRecordsからも削除
+  const records = Store.getMedicalRecords();
+  delete records[patientId];
+  localStorage.setItem('medicalRecords', JSON.stringify(records));
+
+  // 一覧を更新
+  currentPatients = Store.getMedicalPatients();
+  renderPatientList(currentPatients);
+}
+
+/**
+ * 来院情報の編集モードを開始する
+ * @param {number} idx - hospitals配列のインデックス
+ */
+function startEditHospital(idx) {
+  const p = currentPatients.find(pt => pt.id === selectedPatientId);
+  if (!p || !p.hospitals[idx]) return;
+
+  const h = p.hospitals[idx];
+
+  // フォームに既存データを流し込む
+  document.getElementById('editHospital').value  = h.name      || '';
+  document.getElementById('editVisitDate').value = h.lastVisit || Store.getTodayStr();
+  document.getElementById('editMedicine').value  = h.medicine  || '';
+  document.getElementById('editMessage').value   = '';
+
+  // 編集中インデックスを記録（saveRecordで上書き対象を特定するため）
+  editingHospitalIdx = idx;
+
+  // フォームまでスクロール
+  document.getElementById('editHospital').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  document.getElementById('editHospital').focus();
+}
+
+// 編集中の来院インデックス（-1 = 新規追加）
+let editingHospitalIdx = -1;
 
 /**
  * 患者追加モーダルを開く
