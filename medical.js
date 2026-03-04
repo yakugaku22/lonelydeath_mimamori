@@ -230,25 +230,25 @@ function executeAddPatient() {
 
   // localPatientと照合（デモ：1件のみ。本番はAPIで全ユーザー検索）
   const localPatient = Store.getPatient();
-  let patientName = '';
 
-  if (localPatient && localPatient.pairCode === code) {
-    patientName = localPatient.name;
+  // コードが一致する患者が存在しない場合はエラー
+  if (!localPatient || localPatient.pairCode !== code) {
+    resultEl.className = 'add-patient-result error';
+    resultEl.textContent = '⚠️ このコードに一致する患者が見つかりません。コードを確認してください。';
+    return;
   }
 
-  // Store経由で追加（重複チェックあり）
-  const added = Store.addMedicalPatient(code, patientName);
+  // 重複チェック
+  const added = Store.addMedicalPatient(code, localPatient.name);
 
   if (!added) {
     resultEl.className = 'add-patient-result error';
-    resultEl.textContent = '⚠️ このコードはすでに登録済みです';
+    resultEl.textContent = '⚠️ この患者はすでに登録済みです';
     return;
   }
 
   resultEl.className = 'add-patient-result success';
-  resultEl.textContent = patientName
-    ? `✅ ${patientName}さんを追加しました！`
-    : `✅ コード「${code}」を追加しました（患者が設定を完了すると情報が表示されます）`;
+  resultEl.textContent = `✅ ${localPatient.name}さんを追加しました！`;
 
   // 一覧を更新
   setTimeout(() => {
